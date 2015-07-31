@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Team Comp</title>
+  </head>
+  <body>
+    {% set championNames = get_champ_names(champions.champ1, champions.champ2, champions.champ3, champions.champ4, champions.champ5) %}
+    {% set championRates = get_win_rate(champions.champ1, champions.champ2, champions.champ3, champions.champ4, champions.champ5) %}
+    <h1>Team</h1>
+    <h2>
+      {% for name in championNames %}
+      {{ name }}
+      {% endfor %}
+    </h2>
+    <p>Win Rate = {{ championRates[0] }}%</p>
+    <p>Played {{ championRates[1] }} times</p>
+  </body>
+</html>
