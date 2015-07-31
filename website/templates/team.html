@@ -1,17 +1,24 @@
 <html>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
   <head>
     <title>Team Comp</title>
   </head>
   <body>
     {% set championNames = get_champ_names(champions.champ1, champions.champ2, champions.champ3, champions.champ4, champions.champ5) %}
     {% set championRates = get_win_rate(champions.champ1, champions.champ2, champions.champ3, champions.champ4, champions.champ5) %}
-    <h1>Team</h1>
-    <h2>
+    <div class="header">
+    <h1>Team Comp</h1>
+    </div>
+
+    <div class="page">
+    <h2>Champions</h2>
+    <h3>
       {% for name in championNames %}
       {{ name }}
       {% endfor %}
-    </h2>
+    </h3>
     <p>Win Rate = {{ championRates[0] }}%</p>
     <p>Played {{ championRates[1] }} times</p>
+    </div>
   </body>
 </html>
