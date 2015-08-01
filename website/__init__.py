@@ -13,16 +13,14 @@ def index():
 
 @app.route("/team", methods=['POST'])
 def show_team():
-    champs = {
+    selection = {
         'champ1': request.form['champ1'],
         'champ2': request.form['champ2'],
         'champ3': request.form['champ3'],
         'champ4': request.form['champ4'],
         'champ5': request.form['champ5']
     }
-    #for i in range(len(request.args)):
-        #champs["champ{}".format(i+1)] = int(request.args.get('champ{}'.format(i+1)))
-    return render_template('team.html', champions=champs)
+    return render_template('team.html', champions=selection)
 
 def get_champ_names(champId1, champId2, champId3, champId4, champId5):
     champNames = {}
@@ -34,18 +32,19 @@ def get_champ_names(champId1, champId2, champId3, champId4, champId5):
     output = []
     for champ in champIds:
         if not int(champ) == 0:
-            output.append(champNames[int(champ)])
+            output.append(champNames[int(champ)][1:-1])
     output.sort()
+    print(output)
     return output
 
 def get_win_rate(champId1, champId2, champId3, champId4, champId5):
     champIds = [champId1, champId2, champId3, champId4, champId5]
-    champions = []
+    selection = []
     for champ in champIds:
         if not champ == 0:
-            champions.append(int(champ))
-    champions.sort()
-    wins, plays = getWinRate.get_win_rate_champs("5.7.0.275", champions)
+            selection.append(int(champ))
+    selection.sort()
+    wins, plays = getWinRate.get_win_rate_champs("5.7.0.275", selection)
     if not plays == 0:
         winRate = "{0:.2f}".format(wins/plays * 100)
     else:

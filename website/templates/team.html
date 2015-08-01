@@ -14,7 +14,9 @@
     <h2>Champions</h2>
     <h3>
       {% for name in championNames %}
+      <img id={{ name }} src= {{ url_for('static', filename = "images/icons/{}1.png".format(name)) }} width="60" height="60" alt={{ name }} title={{ name }} border="1">
       {{ name }}
+      <br>
       {% endfor %}
     </h3>
     <p>Win Rate = {{ championRates[0] }}%</p>
