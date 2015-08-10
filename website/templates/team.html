@@ -24,12 +24,24 @@
     <p>Played {{ championRates[1] }} times</p>
     {% if not championRates[2] == [] %}
       <hr>
-      <h4>Best Team</h4>
+      <h2>Team Suggestions</h2>
       {% for id in championRates[2][0] %}
       <img id={{ championIds[id] }} src= {{ url_for('static', filename = "images/icons/{}1.png".format(championIds[id])) }} widt="60" height="60" alt={{ championIds[id] }} border="1">
       {% endfor %}
       <p>Win Rate = {{ "{0:.2f}".format(championRates[2][1]/championRates[2][2] * 100) }}%</p>
       <p>Played {{ championRates[2][2] }} times</p>
+      <hr>
+      {% for id in championRates[3][0] %}
+      <img id={{ championIds[id] }} src= {{ url_for('static', filename = "images/icons/{}1.png".format(championIds[id])) }} widt="60" height="60" alt={{ championIds[id] }} border="1">
+      {% endfor %}
+      <p>Win Rate = {{ "{0:.2f}".format(championRates[3][1]/championRates[3][2] * 100) }}%</p>
+      <p>Played {{ championRates[3][2] }} times</p>
+      <hr>
+      {% for id in championRates[4][0] %}
+      <img id={{ championIds[id] }} src= {{ url_for('static', filename = "images/icons/{}1.png".format(championIds[id])) }} widt="60" height="60" alt={{ championIds[id] }} border="1">
+      {% endfor %}
+      <p>Win Rate = {{ "{0:.2f}".format(championRates[4][1]/championRates[4][2] * 100) }}%</p>
+      <p>Played {{ championRates[4][2] }} times</p>
     {% endif %}
     </div>
   </body>

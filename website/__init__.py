@@ -22,21 +22,6 @@ def show_team():
     }
     return render_template('team.html', champions=selection)
 
-def get_champ_names(champId1, champId2, champId3, champId4, champId5):
-    champNames = {}
-    champIds = [champId1, champId2, champId3, champId4, champId5]
-    with open("champlist.txt") as f:
-        for line in f:
-            (key, val) = line.split(',')
-            champNames[int(key)] = val
-    output = []
-    for champ in champIds:
-        if not int(champ) == 0:
-            output.append(champNames[int(champ)][1:-1])
-    output.sort()
-    print(output)
-    return output
-
 def get_win_rate(champId1, champId2, champId3, champId4, champId5):
     champIds = [champId1, champId2, champId3, champId4, champId5]
     selection = []
@@ -45,12 +30,23 @@ def get_win_rate(champId1, champId2, champId3, champId4, champId5):
             selection.append(int(champ))
     selection.sort()
     print(selection)
-    wins, plays, best = getWinRate.get_win_rate_champs("5.7.0.275", selection)
+    wins, plays, first, second, third = getWinRate.get_win_rate_champs("5.7.0.275", selection)
     if not plays == 0:
         winRate = "{0:.2f}".format(wins/plays * 100)
     else:
         winRate = 0
-    return [winRate, plays, best]
+    return [winRate, plays, first, second, third]
+
+def get_champ_names(champId1, champId2, champId3, champId4, champId5):
+    champNames = get_champion_ids()
+    champIds = [champId1, champId2, champId3, champId4, champId5]
+    output = []
+    for champ in champIds:
+        if not int(champ) == 0:
+            output.append(champNames[int(champ)])
+    output.sort()
+    return output
+
 
 def get_champion_ids():
     return {1: 'Annie', 2: 'Olaf', 3: 'Galio', 4: 'TwistedFate', 5: 'XinZhao', 6: 'Urgot', 7: 'LeBlanc',

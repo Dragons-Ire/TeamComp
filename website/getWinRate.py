@@ -44,18 +44,35 @@ def get_win_rate_champs(patch, champIds):
                     j += 1
     else:
         relevant = winRates
-    maximum = 0
+    first = 0
+    second = 0
+    third = 0
     wins = 0
     plays = 0
     for i in range(len(relevant)):
         wins = wins + relevant[i][1]
         plays = plays + relevant[i][2]
-        if relevant[i][1]/relevant[i][2] > relevant[maximum][1]/relevant[maximum][2]:
-            maximum = i
-        elif relevant[i][1]/relevant[i][2] == relevant[maximum][1]/relevant[maximum][2]:
-            if relevant[i][2] > relevant[maximum][2]:
-                maximum = i
+        if relevant[i][1]/relevant[i][2] > relevant[first][1]/relevant[first][2]:
+            third = second
+            second = first
+            first = i
+        elif relevant[i][1]/relevant[i][2] == relevant[first][1]/relevant[first][2]:
+            if relevant[i][2] > relevant[first][2]:
+                third = second
+                second = first
+                first = i
+            else:
+                if relevant[i][2] > relevant[second][2]:
+                    third = second
+                    second = i
+                else:
+                    if relevant[i][2] > relevant[third][2]:
+                        third = i
+                    else:
+                        third = second
+                        second = first
+                        first = i
     if len(relevant) > 0:
-        return [wins, plays, relevant[maximum]]
+        return [wins, plays, relevant[first], relevant[second], relevant[third]]
     else:
-        return [wins, plays, []]
+        return [wins, plays, [], [], []]
