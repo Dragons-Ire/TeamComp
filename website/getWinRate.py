@@ -68,10 +68,6 @@ def get_win_rate_champs(patch, champIds):
                 else:
                     if relevant[i][2] > relevant[third][2]:
                         third = i
-                    else:
-                        third = second
-                        second = first
-                        first = i
     if len(relevant) > 0:
         return [wins, plays, relevant[first], relevant[second], relevant[third]]
     else:
